@@ -1,12 +1,12 @@
 from flask import Flask, request
-from downloadImage import downloadimages
+# from downloadImage import downloadimages
 
 print("Iniciando aplicação......")
 
-app = Flask("System delivery")
+app = Flask(__name__)
 
 
-@app.route("/", methods=["GET"])
+@app.route("/teste", methods=["GET"])
 def helloWord():
    # downloadimages("Xdelssy delivery juazeiro bahia")
     return "Hello"
