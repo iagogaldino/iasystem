@@ -4,10 +4,10 @@ from downloadImage import downloadimages
 app = Flask("System delivery")
 
 
-@app.route("/helloword", methods=["POST"])
+@app.route("/", methods=["GET"])
 def helloWord():
    # downloadimages("Xdelssy delivery juazeiro bahia")
-    return request.get_json()
+    return "Hello"
 
 
 app.run()
