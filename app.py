@@ -4,8 +4,8 @@ import os
 app = Flask(__name__)
 
 
-@app.route("/teste", methods=["GET"])
-def helloWord():
+@app.route("/", methods=["GET"])
+def index():
     return "Hello"
 
 def main():
