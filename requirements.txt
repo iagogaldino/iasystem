@@ -1,8 +1,2 @@
-click==7.1.2
 Flask==2.0.2
-gunicorn==20.1.0
-itsdangerous==2.0
-Jinja2==3.0
-MarkupSafe==2.0.0
-Werkzeug==2.0
-# google_images_download==2.8.0
+google_images_download==2.8.0
