@@ -1,12 +1,12 @@
+import os
 from flask import Flask
 
-my_awesome_app = Flask(__name__)
+app = Flask(__name__)
+env_config = os.getenv("APP_SETTINGS", "config.DevelopmentConfig")
+app.config.from_object(env_config)
 
 
-@my_awesome_app.route('/')
-def hello_world():
-    return 'Hello World!'
-
-
-if __name__ == '__main__':
-    my_awesome_app.run()
+@app.route("/")
+def index():
+    secret_key = app.config.get("SECRET_KEY")
+    return f"The configured secret key is {secret_key}."
