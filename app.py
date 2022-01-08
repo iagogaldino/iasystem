@@ -1,16 +1,12 @@
-from flask import Flask, request
+from flask import Flask
 
-# from downloadImage import downloadimages
-
-print("Iniciando aplicação......")
-
-app = Flask(__name__)
+my_awesome_app = Flask(__name__)
 
 
-@app.route("/", methods=["GET"])
-def index():
-    return "Hello"
+@my_awesome_app.route('/')
+def hello_world():
+    return 'Hello World!'
 
 
-print("run......")
-app.run()
+if __name__ == '__main__':
+    my_awesome_app.run()
