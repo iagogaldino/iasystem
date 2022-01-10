@@ -4,6 +4,9 @@ import os
 import sendFile
 import sendRequest
 import threading
+import execProc
+import execProc
+
 
 app = Flask(__name__)
 
@@ -17,24 +20,35 @@ fileName = "" # Nome da imagem que vai ser pesquisada no GOOGLE
 extesion = ".png"
 idItemDB = 0 # id do item na base do sistema
 
-@app.route("/addProcess", methods=["GET"])
+@app.route("/addProcess", methods=["POST"])
 def addProcess():
-    threading.Thread(target=getImageProduct())
-    return "<h1> Save process </h1>"
 
-@app.route("/getImageProduct", methods=["GET"])
+    id = request.get_json()["id"]
+    name = request.get_json()["name"]
+    fileData = '{"id": '+id+', "name": "'+name+'"}'
+    arquivo = open('allProcess/'+id+".txt", "a")
+    arquivo.write(fileData)
+
+    return fileData
+
+
+
 def getImageProduct():
     print('getImageProduct')
-    
-    if not request.args.get("id"): 
-        return('Erro id item')
-    
-    idItemDB = request.args.get("id")
+    print(request.get_json())
+    try:
+        idItemDB = request.get_json()["id"]
+    except:
+        print('Erro id')
 
     try:
-        fileName = request.args.get("image") + " imagem"
+        fileName = request.get_json()["name"] + " imagem"
     except:
-        return 'Falta parametro < image >'
+        print('Erro nome')
+
+
+
+
     # Faz download da imagem pelo Google
     downloadImage.downloadimages(fileName)
     # Envia imagem para o repositorio do sistema e rescebe os dados da img pela resposta
@@ -51,6 +65,7 @@ def getImageProduct():
 
 def main():
     port = int(os.environ.get("PORT", 5000))
+    threading.Thread(target=execProc.loopFunc, args=()).start()
     app.run(host="0.0.0.0", port=port)
 
 
