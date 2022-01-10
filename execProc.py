@@ -62,7 +62,7 @@ def getImageProduct(idItemDB, name, fileNameDelete):
         "imageResquest": fileName,
         "fileName": fname,
         "urlImage": urlImage,
-        "rs": rs,
+        "rs": rs
     }
 
     print(res)
