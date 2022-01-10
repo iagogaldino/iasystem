@@ -15,7 +15,7 @@ def index():
 
 fileName = "" # Nome da imagem que vai ser pesquisada no GOOGLE
 extesion = ".png"
-idItemDB = 0; # id do item na base do sistema
+idItemDB = 0 # id do item na base do sistema
 
 @app.route("/addProcess", methods=["GET"])
 def addProcess():
@@ -24,6 +24,7 @@ def addProcess():
 
 @app.route("/getImageProduct", methods=["GET"])
 def getImageProduct():
+    print('getImageProduct')
     
     if not request.args.get("id"): 
         return('Erro id item')
