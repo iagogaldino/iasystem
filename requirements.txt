@@ -8,4 +8,4 @@ MarkupSafe==2.0.0
 Six==1.16.0
 Werkzeug==2.0
 google_images_download==2.8.0
-requests==2.0.10
+requests==2.27.1
