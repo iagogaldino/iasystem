@@ -25,7 +25,7 @@ def getImageProduct():
     idItemDB = request.args.get("id")
 
     try:
-        fileName = request.args.get("image") + " icon"
+        fileName = request.args.get("image") + " imagem"
     except:
         return 'Falta parametro < image >'
     # Faz download da imagem pelo Google
