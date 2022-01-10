@@ -2,12 +2,13 @@ import requests
 import json
 import config
 
-def sendPostFile(params):
-        url = config.URL + "?acao=updateImageProduct&api=apiEstabelecimento"
+
+
+def sendRequest(action, apiName, params):  # "?acao=updateImageProduct&api=apiEstabelecimento"
+       
+        url = config.URL + "?acao=" + action + "&api=" + apiName
         print(url, params)
-        r = requests.get(url, data=params)
-        return r.text
+        r = requests.post(url, data=params, headers=config.headers)
+        return json.loads(r.text)
 
-
-
-# sendPostFile({"id": "287", "url": "teste"})
+# print(sendRequest('updateImageProduct', 'apiEstabelecimento', {"id": "287", "url": "teste"}))

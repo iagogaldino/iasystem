@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 import downloadImage
 import os
 import sendFile
@@ -12,22 +12,34 @@ def index():
     return "Hello"
 
 
-fileName = "Guarana lata 350 ml icon"
+fileName = "" # Nome da imagem que vai ser pesquisada no GOOGLE
 extesion = ".png"
-
+idItemDB = 0; # id do item na base do sistema
 
 @app.route("/getImageProduct", methods=["GET"])
 def getImageProduct():
-    # fileName = request.args.get("image") + " icon"
-    # r = downloadImage.downloadimages(fileName)
-    # rapi = sendFile.sendPostFile(fileName + extesion)
-    rs = sendRequest.sendPostFile({"id": "287", "url": "teste"})
-    return rs
-    # return {
-    #     "imageResquest": fileName,
-    #     "fileName": rapi["filename"],
-    #     "urlImage": rapi["urlImage"],
-    # }
+    
+    if not request.args.get("id"): 
+        return('Erro id item')
+    
+    idItemDB = request.args.get("id")
+
+    try:
+        fileName = request.args.get("image") + " icon"
+    except:
+        return 'Falta parametro < image >'
+    # Faz download da imagem pelo Google
+    downloadImage.downloadimages(fileName)
+    # Envia imagem para o repositorio do sistema e rescebe os dados da img pela resposta
+    rapi = sendFile.sendPostFile(fileName + extesion)
+    urlImage = rapi["urlImage"];
+    rs = sendRequest.sendRequest('updateImageProduct', 'apiEstabelecimento', {"id": idItemDB, "url": urlImage})
+    return {
+        "imageResquest": fileName,
+        "fileName": rapi["filename"],
+        "urlImage": rapi["urlImage"],
+        "rs": rs,
+    }
 
 
 def main():
