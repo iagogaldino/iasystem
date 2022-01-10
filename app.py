@@ -3,6 +3,7 @@ import downloadImage
 import os
 import sendFile
 import sendRequest
+import threading
 
 app = Flask(__name__)
 
@@ -15,6 +16,11 @@ def index():
 fileName = "" # Nome da imagem que vai ser pesquisada no GOOGLE
 extesion = ".png"
 idItemDB = 0; # id do item na base do sistema
+
+@app.route("/addProcess", methods=["GET"])
+def addProcess():
+    threading.Thread(target=getImageProduct())
+    return "<h1> Save process </h1>"
 
 @app.route("/getImageProduct", methods=["GET"])
 def getImageProduct():
