@@ -58,12 +58,14 @@ def getImageProduct(idItemDB, name, fileNameDelete):
   
     rs = sendRequest.sendRequest('updateImageProduct', 'apiEstabelecimento', {"id": idItemDB, "url": urlImage})
     deleteFile(fileNameDelete)
-    return {
+    res = {
         "imageResquest": fileName,
         "fileName": fname,
         "urlImage": urlImage,
         "rs": rs,
     }
+
+    print(res)
 
 
 def deleteFile(fileName):
